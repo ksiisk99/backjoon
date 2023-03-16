@@ -24,6 +24,10 @@ public class Main {
             result = Math.min(result, cnt);
             return;
         }
+        
+        if(result<cnt){
+            return;
+        }
 
         if(y>9){
             dfs(x+1,0,cnt);
