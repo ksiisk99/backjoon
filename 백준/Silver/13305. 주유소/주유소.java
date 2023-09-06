@@ -61,8 +61,8 @@ public class Main {
 			arr[1][i]=Integer.parseInt(st.nextToken());
 		}
 		
-		long dist=0;
-		long price=0;
+		int dist=0;
+		int price=0;
 		int idx=0;
 		
 		for(int i=0;i<N-1;i++) {
