@@ -1,9 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -16,18 +14,29 @@ public class Main {
     public static void main(String[] args) throws IOException {
         input();
 
-        int size = 2 * M;
         for (int i = 0; i < N; i++) {
-            List<Integer> tmp = new ArrayList<>();
-            add(i, tmp);
 
             int idx = 0;
             for (int j = M - 1; j >= 0; j--) {
-                board[j][0] += tmp.get(idx++);
+                if (arr[i][idx] == 0) {
+                    idx++;
+                    j++;
+                    continue;
+                }
+
+                board[j][0] += idx;
+                arr[i][idx]--;
             }
 
             for (int j = 1; j < M; j++) {
-                board[0][j] += tmp.get(idx++);
+                if (arr[i][idx] == 0) {
+                    idx++;
+                    j--;
+                    continue;
+                }
+
+                board[0][j] += idx;
+                arr[i][idx]--;
             }
         }
 
@@ -53,21 +62,6 @@ public class Main {
 
         System.out.print(sb.toString());
     }
-
-    private static void add(int idx, List<Integer> tmp) {
-        for (int i = 0; i < arr[idx][0]; i++) {
-            tmp.add(0);
-        }
-
-        for (int i = 0; i < arr[idx][1]; i++) {
-            tmp.add(1);
-        }
-
-        for (int i = 0; i < arr[idx][2]; i++) {
-            tmp.add(2);
-        }
-    }
-
 
     private static void input() throws IOException {
         StringTokenizer st = new StringTokenizer(br.readLine());
