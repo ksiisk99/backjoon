@@ -35,11 +35,10 @@ public class Main {
             int[] cur = pq.poll();
 
             if (check[cur[0]]) continue;
-            if (dist[cur[0]] < cur[1]) continue;
             check[cur[0]] = true;
 
             for (int[] next : edges[cur[0]]) {
-                if (!check[next[0]] && dist[next[0]] > dist[cur[0]] + next[1]) {
+                if (dist[next[0]] > dist[cur[0]] + next[1]) {
                     dist[next[0]] = dist[cur[0]] + next[1];
                     pq.offer(new int[]{next[0], dist[next[0]]});
                 }
