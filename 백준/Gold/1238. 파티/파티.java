@@ -16,8 +16,8 @@ public class Main {
         int[] reverseDist = dijkstra(reverseEdges);
 
         int answer = 0;
-        for(int i=1;i<=N;i++){
-            answer = Math.max(answer, dist[i]+reverseDist[i]);
+        for (int i = 1; i <= N; i++) {
+            answer = Math.max(answer, dist[i] + reverseDist[i]);
         }
 
         System.out.print(answer);
@@ -27,16 +27,19 @@ public class Main {
         PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[1]));
         int[] dist = new int[N + 1];
         Arrays.fill(dist, Integer.MAX_VALUE);
+        boolean[] check = new boolean[N + 1];
 
         dist[X] = 0;
         pq.add(new int[]{X, 0});
         while (!pq.isEmpty()) {
             int[] cur = pq.poll();
 
+            if (check[cur[0]]) continue;
             if (dist[cur[0]] < cur[1]) continue;
+            check[cur[0]] = true;
 
             for (int[] next : edges[cur[0]]) {
-                if (dist[next[0]] > dist[cur[0]] + next[1]) {
+                if (!check[next[0]] && dist[next[0]] > dist[cur[0]] + next[1]) {
                     dist[next[0]] = dist[cur[0]] + next[1];
                     pq.offer(new int[]{next[0], dist[next[0]]});
                 }
