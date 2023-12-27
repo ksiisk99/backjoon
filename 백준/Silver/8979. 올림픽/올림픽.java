@@ -41,11 +41,11 @@ public class Main {
 
     private static boolean isLose(Nation otherNation) {
         if (targetNation.gold != otherNation.gold) {
-            return otherNation.gold < targetNation.gold;
+            return otherNation.gold > targetNation.gold;
         } else if (targetNation.silver != otherNation.silver) {
-            return otherNation.silver < targetNation.silver;
+            return otherNation.silver > targetNation.silver;
         }
-        return otherNation.bronze < targetNation.bronze;
+        return otherNation.bronze > targetNation.bronze;
     }
 
     private static void input() throws IOException {
