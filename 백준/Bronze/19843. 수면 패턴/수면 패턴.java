@@ -1,33 +1,26 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static StringBuilder answer = new StringBuilder();
     private static int T, N;
-    private static Boolean[] time;
 
 
     public static void main(String[] args) throws IOException {
         input();
 
+        int sleepTime = 0;
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
 
             int start = calculateSleepTime(st.nextToken(), Integer.parseInt(st.nextToken()));
             int end = calculateSleepTime(st.nextToken(), Integer.parseInt(st.nextToken()));
 
-            for (int j = start + 1; j <= end; j++) {
-                time[j] = true;
-            }
+            sleepTime += (end - start);
         }
-
-        int sleepTime = (int) Arrays.stream(time)
-                .filter(Boolean::booleanValue)
-                .count();
 
         if (sleepTime >= T) {
             System.out.print(0);
@@ -59,9 +52,6 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         T = Integer.parseInt(st.nextToken());
         N = Integer.parseInt(st.nextToken());
-
-        time = new Boolean[24 * 7];
-        Arrays.fill(time, false);
     }
 
 }
